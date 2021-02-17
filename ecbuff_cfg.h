@@ -6,10 +6,15 @@
  */
 #include <signal.h>
 #include <stdint.h>
-#define ECB_ATOMIC_T sig_atomic_t
-#define ECB_ATOMIC_MAX SIG_ATOMIC_MAX
-#define ECB_UINT_T unsigned int
-#define ECB_UINT_MAX UINT_MAX
+
+/** pour cortex-M0, uint32 est atomic R / W mais pas RMW.
+ * Pour ecbuff.c, il semble que tous les usages sont des R ou W simples,
+ * donc ca devrait etre OK.
+ */
+#define ECB_ATOMIC_T uint32_t
+#define ECB_ATOMIC_MAX UINT32_MAX
+#define ECB_UINT_T uint32_t
+#define ECB_UINT_MAX UINT32_MAX
 
 /* ECB_ASSERT
  * Enable runtime checks
